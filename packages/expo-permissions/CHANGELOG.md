@@ -4,6 +4,8 @@
 
 ### 🛠 Breaking changes
 
+- Add `scope` field in returned value to indicate whether background permissions are granted. Add `android.accuracy` field to determine whether `coarse` or `fine` location permission is granted.([#9446](https://github.com/expo/expo/pull/9446) by [@mczernek](https://github.com/mczernek))
+
 ### 🎉 New features
 
 - Add `usePermissions` hook to simplify permission handling. ([#8788](https://github.com/expo/expo/pull/8788) by [@bycedric](https://github.com/bycedric))
