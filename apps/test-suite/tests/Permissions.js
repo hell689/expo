@@ -131,5 +131,35 @@ export function test(t) {
         t.expect(calendarPermissionKeys).toContain('expires');
       });
     });
+
+    t.describe('of Permissions.LOCATION', () => {
+      t.it('has proper shape', async () => {
+        const result = await Permissions.getAsync(Permissions.LOCATION);
+        const keys = Object.keys(result);
+        const permissionsKeys = Object.keys(result.permissions);
+
+        // check top-level
+        t.expect(keys).toContain('status');
+        t.expect(keys).toContain('expires');
+        t.expect(keys).toContain('permissions');
+
+        t.expect(permissionsKeys).toContain(Permissions.LOCATION);
+        const locationPermissionKeys = Object.keys(result.permissions[Permissions.LOCATION]);
+        t.expect(locationPermissionKeys).toContain('status');
+        t.expect(locationPermissionKeys).toContain('canAskAgain');
+        t.expect(locationPermissionKeys).toContain('granted');
+        t.expect(locationPermissionKeys).toContain('expires');
+
+        if (Platform.OS === 'android') {
+          t.expect(locationPermissionKeys).toContain('android');
+          const androidLocationPermissionKeys = Object.keys(
+            result.permissions[Permissions.LOCATION]['android']
+          );
+          t.expect(androidLocationPermissionKeys).toContain('accuracy');
+        }
+
+        console.log('yszty: ', JSON.stringify(result));
+      });
+    });
   });
 }
